@@ -1,5 +1,15 @@
 .App {
   text-align: center;
+  
+}
+.MovieCard{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: space-evenly;
+  gap: 50px;
+  align-items: center
 }
 
 
