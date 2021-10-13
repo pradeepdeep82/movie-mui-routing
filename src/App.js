@@ -5,11 +5,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
-// import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import DeleteIcon from '@mui/icons-material/Delete';
+
+import TextField from '@mui/material/TextField';
 import './App.css';
 const movies= [
   {
@@ -1473,6 +1475,7 @@ function App() {
   return (
     
     <div className="App">
+        <AddMovie movie={movie} setMovies={setMovies}/>
       <div className="MovieCard">
       {movie.map((movies,index)=>{
         return(
@@ -1520,7 +1523,7 @@ function MovieCard({
       <CardMedia
         component="img"
         alt="Movie poster"
-        height="140"
+        height="500"
         image={img}
       />
       <CardContent>
@@ -1542,10 +1545,41 @@ function MovieCard({
       👎
     </Badge>
 </IconButton>
-<IconButton onClick={deleteMovie} aria-label="delete movie"><DeleteIcon color="error" /></IconButton>
+<Button onClick={deleteMovie} aria-label="delete movie" variant="outlined" startIcon={<DeleteIcon />} color="error">
+        Delete
+      </Button>
+
       </CardActions>
     </Card>
     </div>
   );
+}
+
+function AddMovie(
+   { movie,
+    setMovies}
+){
+    const[title, setTitle]=useState();
+    const[plot,setPlot]=useState();
+    const[poster,setPoster]=useState();
+    const[year,setYear]=useState()
+    const updateArr=()=>{
+        setMovies([...movie,{
+            title: title,
+            plot: plot,
+            posterUrl:poster,
+            year:year
+        }])
+    }
+
+    return(
+        <div>
+            <TextField id="filled-basic" onChange={(event)=>setTitle(event.target.value)} label="Movie name" variant="filled"/><br/><br/>
+            <TextField id="filled-basic" onChange={(event)=>setYear(event.target.value)} label="Year of Release" variant="filled"/><br/><br/>
+            <TextField id="filled-basic" onChange={(event)=>setPlot(event.target.value)} label="Movie plot" variant="filled"/><br/><br/>
+            <TextField id="filled-basic" onChange={(event)=>setPoster(event.target.value)} label="Movie poster Url" variant="filled"/><br/><br/>
+            <Button variant="contained" color="success" onClick={updateArr} >Add Movie</Button><br/><br/>
+        </div>
+    )
 }
 export default App;
