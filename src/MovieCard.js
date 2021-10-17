@@ -10,6 +10,7 @@ import Badge from "@mui/material/Badge";
 import DeleteIcon from "@mui/icons-material/Delete";
 import InfoIcon from "@mui/icons-material/Info";
 import { useHistory } from "react-router-dom";
+import EditIcon from '@mui/icons-material/Edit';
 
 export function MovieCard({ img, title, plot, movies, setMovies, ind, year, id }) {
     const [disLike, setDislike] = useState(0);
@@ -26,7 +27,7 @@ export function MovieCard({ img, title, plot, movies, setMovies, ind, year, id }
     const history = useHistory();
     return (
         <div className="MovieCard">
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: 400 }}>
                 <CardMedia
                     component="img"
                     alt="Movie poster"
@@ -41,6 +42,13 @@ export function MovieCard({ img, title, plot, movies, setMovies, ind, year, id }
 
                             }}>
                             <InfoIcon />
+                        </IconButton>
+                        <IconButton  aria-label="Detail info of the movie"
+                            onClick={() => {
+                                history.push("/movielist/edit/" + id);
+
+                            }}>
+                            <EditIcon />
                         </IconButton>
                     </Typography>
 
