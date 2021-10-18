@@ -11,7 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import InfoIcon from "@mui/icons-material/Info";
 import { useHistory } from "react-router-dom";
 import EditIcon from '@mui/icons-material/Edit';
-
+const updateStoredMovies=(updatedMovie)=>localStorage.setItem("movies",JSON.stringify(updatedMovie))
 export function MovieCard({ img, title, plot, movies, setMovies, ind, year, id }) {
     const [disLike, setDislike] = useState(0);
     const [like, setLike] = useState(0);
@@ -23,6 +23,7 @@ export function MovieCard({ img, title, plot, movies, setMovies, ind, year, id }
             }
         });
         setMovies([...tempMovie]);
+        updateStoredMovies(tempMovie)
     };
     const history = useHistory();
     return (
