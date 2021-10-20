@@ -3,14 +3,14 @@ import { useParams, useHistory } from "react-router-dom";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { getFromStorage, updateStoredMovies } from "./App";
+import { updateStoredMovies } from "./App";
 
 export function EditMovie({
   movie, setMovies
 }) {
   const history = useHistory();
   const { id } = useParams();
-  const movies = getFromStorage('movies')[id];
+  const movies = movie[id];
   const [title, setTitle] = useState();
   const [plot, setPlot] = useState();
   const [poster, setPoster] = useState();
