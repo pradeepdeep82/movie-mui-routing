@@ -5,22 +5,46 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { updateStoredMovies } from "./App";
 
+
 export function EditMovie({
   movie, setMovies
 }) {
   const history = useHistory();
   const { id } = useParams();
   const movies = movie[id];
-  const [title, setTitle] = useState();
-  const [plot, setPlot] = useState();
-  const [poster, setPoster] = useState();
-  const [year, setYear] = useState();
-  // const tempMovie=movies;
+  let [title, setTitle] = useState();
+  let [plot, setPlot] = useState();
+  let [poster, setPoster] = useState();
+  let [year, setYear] = useState();
+
+  // function crtEdit(data){
+  //   if(data!==undefined){
+  //    return movies.data=data;
+  //   }
+  // }
   const updateEdited = () => {
-    movies.title = title;
-    movies.plot = plot;
-    movies.poster = poster;
-    movies.year = year;
+    // console.log(crtEdit(title));
+    // crtEdit(plot);
+    // crtEdit(poster);
+    // crtEdit(year);
+    // console.log(title, plot, year)
+    if(title!==undefined ){
+      movies.title=title;
+       }
+       if(plot!==undefined ){
+        movies.plot=plot;
+         }
+         if(poster!==undefined ){
+          movies.poster=poster;
+           }
+           if(year!==undefined ){
+            movies.year=year;
+             }
+    //  movies.title = title;
+
+    // movies.plot = plot;
+    // movies.poster = poster;
+    // movies.year = year;
     setMovies([...movie]);
     updateStoredMovies([...movie]);
     history.push("/movielist");
