@@ -4,37 +4,60 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import{useHistory}from "react-router-dom";
 
+
 export function AddMovie({ movie, setMovies }) {
     const history=useHistory();
     const [title, setTitle] = useState();
     const [plot, setPlot] = useState();
     const [poster, setPoster] = useState();
     const [year, setYear] = useState();
-    const updateArr = () => {
-        setMovies([
-            ...movie,
-            {
+    const createMovie = (newMovie) => {
+        fetch("https://6173de78110a74001722318d.mockapi.io/movies", {
+            method:"POST",
+            body:JSON.stringify(newMovie),
+            headers:{"conste-type":"application/json"},
+        })
+        .then(data=>data.json())
+        .then(data=>history.push("/movielist"))
+        // .then(mv=>setMovie(mv))
+        
+           
+        };
+        const addmovie=()=>{
+            const newMovie={
                 title: title,
                 plot: plot,
                 posterUrl: poster,
                 year: year,
-            },
-        ])
-        console.log(movie)
-        localStorage.setItem("movies", JSON.stringify([
-            ...movie,
-            {
-                title: title,
-                plot: plot,
-                posterUrl: poster,
-                year: year,
-            },
-        ]))
-        history.push("/movielist")
-    };
-
+            };
+            createMovie(newMovie)
+            // history.push("/movielist")
+        };
+    
+    // const addmovie = () => {
+    //     setMovies([
+    //         ...movie,
+    //         {
+    //             title: title,
+    //             plot: plot,
+    //             posterUrl: poster,
+    //             year: year,
+    //         },
+    //     ])
+    //     console.log(movie)
+    //     localStorage.setItem("movies", JSON.stringify([
+    //         ...movie,
+    //         {
+    //             title: title,
+    //             plot: plot,
+    //             posterUrl: poster,
+    //             year: year,
+    //         },
+    //     ]))
+    //     history.push("/movielist")
+    // }
     return (
-        <div>
+        <div >
             <br/>
             <Box
                 sx={{
@@ -77,7 +100,7 @@ export function AddMovie({ movie, setMovies }) {
                 <br />
                 <br />
             </Box>
-            <Button variant="contained" color="success" onClick={updateArr}>
+            <Button variant="contained" color="success" onClick={addmovie}>
                 Add Movie
             </Button>
             <br />

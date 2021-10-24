@@ -1,15 +1,23 @@
 import { useParams, useHistory } from "react-router-dom";
 import Button from '@mui/material/Button';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { getFromStorage } from "./App";
+// import { getFromStorage } from "./App";
+import { useState, useEffect } from "react";
 
 export function AboutMovie() {
   const history = useHistory();
   const { id } = useParams();
-  const movie = getFromStorage('movies')[id];
+  // const movie = getFromStorage('movies')[id];
+  const[movie,setMovie]=useState({})
+  const getMovies=()=>{
+    fetch("https://6173de78110a74001722318d.mockapi.io/movies/"+id, {method:"GET"})
+    .then(data=>data.json())
+    .then(mv=>setMovie(mv))
+  };
+  useEffect(getMovies,[]);
   return (
     <div>
-
+   
       <h2>Title: {movie.title}</h2>
       <img src={movie.posterUrl} alt="Movie poster"></img>
       <h2>Year of release: {movie.year}</h2>

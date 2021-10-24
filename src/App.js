@@ -1,30 +1,52 @@
-import { useState } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import  React from 'react';
+import { Switch , Route, Link } from "react-router-dom";
 import "./App.css";
 import { AddMovie } from "./AddMovie";
 import { movies } from "./movies";
 import { MovieCard } from "./MovieCard";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
-
+import IconButton from '@mui/material/IconButton';
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { EditMovie } from "./EditMovie";
 import { AboutMovie } from "./AboutMovie";
+import { Paper } from "@mui/material";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import { yellow } from "@mui/material/colors";
 // import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 localStorage.setItem("movies", JSON.stringify(movies));
 export const getFromStorage = (key) => JSON.parse(localStorage.getItem(key));
 export const updateStoredMovies = (updatedMovie) =>
   localStorage.setItem("movies", JSON.stringify(updatedMovie));
-function App() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [movie, setMovies] = useState(movies);
+  
+
+ 
+  function App() {
+    const[darkMode, setDarkMode]=useState(false);
+    const theme=createTheme({
+      palette:{
+        mode:darkMode?"dark":"light"
+      }
+    });
+  // const [movie, setMovies] = useState(movies);
+  const [movie, setMovies] = useState([]);
+  // called only when mounted or change the url or conditional rendering
+  const getMovies=()=>{
+    fetch("https://6173de78110a74001722318d.mockapi.io/movies", {method:"GET"})
+    .then(data=>data.json())
+    .then(mvs=>setMovies(mvs))
+  };
+  useEffect(getMovies,[]);
+
   return (
+    <ThemeProvider theme={theme}>
+      <Paper className="background" >
     <div className="App">
-      <div className={darkMode ? "dark-mode" : "light-mode"}>
-       
-      
+        
       <Box className="navBar" sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar variant="dense">
@@ -38,19 +60,19 @@ function App() {
               <Link className="link" to="/addmovie">
                 Add Movie
               </Link>
+              <IconButton
+             onClick={()=>setDarkMode(!darkMode)}
+              
+              aria-label="Theme change"
+            >
+              {darkMode ? <DarkModeIcon /> : <LightModeIcon sx={{ color: yellow[500] }} />}
+            </IconButton>
+            
+              
             </Typography>
-            <div className="container">
-          <span style={{ color: darkMode ? "grey" : "yellow" }}>☀︎</span>
-          <div className="switch-checkbox">
-            <label className="switch">
-              <input type="checkbox" onChange={() => setDarkMode(!darkMode)} />
-              <span className="slider round"> </span>
-            </label>
-          </div>
-          <span style={{ color: darkMode ? "#c96dfd" : "grey" }}>☽</span>
-        </div>
           </Toolbar>
         </AppBar>
+       
       </Box>
 
       <Switch>
@@ -72,7 +94,9 @@ function App() {
                   movies={movie}
                   setMovies={setMovies}
                   year={movies.year}
-                  id={index}
+                  // id={index}
+                  id={movies.id}
+                  getMovies={getMovies}
                 />
               );
             })}
@@ -87,25 +111,11 @@ function App() {
         </Route>
       </Switch>
     </div>
-    </div>
+    </Paper>
+    </ThemeProvider>
   );
 }
-// function ThemeChanger() {
-//   const [darkMode, setDarkMode] = useState(false);
-//   return (
-//     <div className={darkMode ? "dark-mode" : "light-mode"}>
-//       <div className="container">
-//         <span style={{ color: darkMode ? "grey" : "yellow" }}>☀︎</span>
-//         <div className="switch-checkbox">
-//           <label className="switch">
-//             <input type="checkbox" onChange={() => setDarkMode(!darkMode)} />
-//             <span className="slider round"> </span>
-//           </label>
-//         </div>
-//         <span style={{ color: darkMode ? "#c96dfd" : "grey" }}>☽</span>
-//       </div>
-//     </div>
-//   );
-// }
+
+
 
 export default App;

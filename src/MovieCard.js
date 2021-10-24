@@ -4,7 +4,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -13,8 +13,8 @@ import { useHistory } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-const updateStoredMovies = (updatedMovie) =>
-  localStorage.setItem("movies", JSON.stringify(updatedMovie));
+// const updateStoredMovies = (updatedMovie) =>
+  // localStorage.setItem("movies", JSON.stringify(updatedMovie));
 export function MovieCard({
   img,
   title,
@@ -24,23 +24,37 @@ export function MovieCard({
   ind,
   year,
   id,
+  
 }) {
   const [show, setShow] = useState(false);
   const [disLike, setDislike] = useState(0);
   const [like, setLike] = useState(0);
-  const deleteMovie = () => {
-    let tempMovie = movies;
-    movies.forEach((movie, indx) => {
-      if (ind === indx) {
-        tempMovie.splice(indx, 1);
-      }
-    });
-    setMovies([...tempMovie]);
-    updateStoredMovies(tempMovie);
+  // const deleteMovie = () => {
+  //   let tempMovie = movies;
+  //   movies.forEach((movie, indx) => {
+  //     if (ind === indx) {
+  //       tempMovie.splice(indx, 1);
+  //     }
+  //   });
+  //   setMovies([...tempMovie]);
+  //   updateStoredMovies(tempMovie);
+  // };
+  const deleteMovie=()=>{
+    fetch("https://6173de78110a74001722318d.mockapi.io/movies/"+id, {method:"DELETE"})
+    .then(data=>data.json())
+    .then(data=>getMovies())
   };
+
   const history = useHistory();
+  const getMovies=()=>{
+    fetch("https://6173de78110a74001722318d.mockapi.io/movies", {method:"GET"})
+    .then(data=>data.json())
+    .then(mvs=>setMovies(mvs))
+  };
+  useEffect(getMovies,[]);
   return (
     <div className="MovieCard">
+     
       <Card sx={{ maxWidth: 400 }}>
         <CardMedia
           component="img"

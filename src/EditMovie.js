@@ -22,12 +22,14 @@ export function EditMovie({
   //    return movies.data=data;
   //   }
   // }
+  //working good
   const updateEdited = () => {
     // console.log(crtEdit(title));
     // crtEdit(plot);
     // crtEdit(poster);
     // crtEdit(year);
     // console.log(title, plot, year)
+      //working good
     if(title!==undefined ){
       movies.title=title;
        }
@@ -53,7 +55,7 @@ export function EditMovie({
   };
 
   return (
-    <div>
+    <div >
       <Box
         component="form"
         sx={{
@@ -63,6 +65,7 @@ export function EditMovie({
         autoComplete="off"
       >
         <div>
+          <br/>
           <TextField
             onChange={(event) => setTitle(event.target.value)}
             id="outlined"
