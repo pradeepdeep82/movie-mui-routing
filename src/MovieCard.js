@@ -51,7 +51,7 @@ export function MovieCard({
     .then(data=>data.json())
     .then(mvs=>setMovies(mvs))
   };
-  useEffect(getMovies,[]);
+  useEffect(getMovies);
   return (
     <div className="MovieCard">
      

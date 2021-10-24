@@ -14,7 +14,7 @@ export function AboutMovie() {
     .then(data=>data.json())
     .then(mv=>setMovie(mv))
   };
-  useEffect(getMovies,[]);
+  useEffect(getMovies);
   return (
     <div>
    

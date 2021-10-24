@@ -96,7 +96,7 @@ export const updateStoredMovies = (updatedMovie) =>
                   year={movies.year}
                   // id={index}
                   id={movies.id}
-                  getMovies={getMovies}
+                  
                 />
               );
             })}
