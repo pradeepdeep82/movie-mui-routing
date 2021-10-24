@@ -11,18 +11,7 @@ export function AddMovie({ movie, setMovies }) {
     const [plot, setPlot] = useState();
     const [poster, setPoster] = useState();
     const [year, setYear] = useState();
-    const createMovie = (newMovie) => {
-        fetch("https://6173de78110a74001722318d.mockapi.io/movies", {
-            method:"POST",
-            body:JSON.stringify(newMovie),
-            headers:{"conste-type":"application/json"},
-        })
-        .then(data=>data.json())
-        .then(data=>history.push("/movielist"))
-        // .then(mv=>setMovie(mv))
-        
-           
-        };
+   
         const addmovie=()=>{
             const newMovie={
                 title: title,
@@ -30,7 +19,15 @@ export function AddMovie({ movie, setMovies }) {
                 posterUrl: poster,
                 year: year,
             };
-            createMovie(newMovie)
+            fetch("https://6173de78110a74001722318d.mockapi.io/movies", {
+                method:"POST",
+                body:JSON.stringify(newMovie),
+                headers:{"content-type":"application/json"},
+            })
+            .then(data=>data.json())
+            .then(data=>history.push("/movielist"))
+            // .then(mv=>setMovie(mv))
+            
             // history.push("/movielist")
         };
     

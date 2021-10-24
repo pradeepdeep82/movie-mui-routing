@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { updateStoredMovies } from "./App";
+// import { updateStoredMovies } from "./App";
 
 
 export function EditMovie({
@@ -16,43 +16,61 @@ export function EditMovie({
   let [plot, setPlot] = useState();
   let [poster, setPoster] = useState();
   let [year, setYear] = useState();
-
+const updateEdited=()=>{
+  const editedMovie={
+    title: title,
+    plot: plot,
+    posterUrl: poster,
+    year: year,
+};
+fetch("https://6173de78110a74001722318d.mockapi.io/movies/"+id, {
+                method:"PUT",
+                body:JSON.stringify(editedMovie),
+                headers:{"content-type":"application/json"},
+            })
+            .then(data=>data.json())
+            .then(data=>history.push("/movielist"))
+}
   // function crtEdit(data){
   //   if(data!==undefined){
   //    return movies.data=data;
   //   }
   // }
   //working good
-  const updateEdited = () => {
+  // const updateEdited = () => {
+
     // console.log(crtEdit(title));
     // crtEdit(plot);
     // crtEdit(poster);
     // crtEdit(year);
     // console.log(title, plot, year)
-      //working good
-    if(title!==undefined ){
-      movies.title=title;
-       }
-       if(plot!==undefined ){
-        movies.plot=plot;
-         }
-         if(poster!==undefined ){
-          movies.poster=poster;
-           }
-           if(year!==undefined ){
-            movies.year=year;
-             }
-    //  movies.title = title;
 
+
+      //working good
+    // if(title!==undefined ){
+    //   movies.title=title;
+    //    }
+    //    if(plot!==undefined ){
+    //     movies.plot=plot;
+    //      }
+    //      if(poster!==undefined ){
+    //       movies.poster=poster;
+    //        }
+    //        if(year!==undefined ){
+    //         movies.year=year;
+    //          }
+
+
+    //  movies.title = title;
     // movies.plot = plot;
     // movies.poster = poster;
     // movies.year = year;
-    setMovies([...movie]);
-    updateStoredMovies([...movie]);
-    history.push("/movielist");
+    // setMovies([...movie]);
+    // updateStoredMovies([...movie]);
+    // history.push("/movielist");
 
 
-  };
+ 
 
   return (
     <div >
