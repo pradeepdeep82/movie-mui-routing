@@ -11,7 +11,7 @@ export function EditMovie({
 }) {
   const history = useHistory();
   const { id } = useParams();
-  const movies = movie[id];
+  const movies = movie.find(movies=>movies.id===id);
   let [title, setTitle] = useState();
   let [plot, setPlot] = useState();
   let [poster, setPoster] = useState();
