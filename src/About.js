@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormik, Formik } from "formik";
+import { useFormik,  } from "formik";
 
 export function About() {
   const validateAboutForm = (values) => {
