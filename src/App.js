@@ -17,6 +17,11 @@ import { Paper } from "@mui/material";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { yellow } from "@mui/material/colors";
+import HomeIcon from '@mui/icons-material/Home';
+import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import AddIcon from '@mui/icons-material/Add';
+import InfoIcon from '@mui/icons-material/Info';
+import { About } from "./About";
 // import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 localStorage.setItem("movies", JSON.stringify(movies));
 export const getFromStorage = (key) => JSON.parse(localStorage.getItem(key));
@@ -52,15 +57,18 @@ export const updateStoredMovies = (updatedMovie) =>
           <Toolbar variant="dense">
             <Typography variant="h6" color="inherit" component="div">
               <Link className="link" to="/">
-                Home
+                <HomeIcon className="icon"/>Home
               </Link>
               <Link className="link" to="/movielist">
-                Movie List
+               <LocalMoviesIcon className="icon"/> Movie List
               </Link>
               <Link className="link" to="/addmovie">
-                Add Movie
+               <AddIcon className="icon"/> Add Movie
               </Link>
-              <IconButton
+              <Link className="link" to="/about">
+              <InfoIcon className="icon" /> About
+              </Link>
+              <IconButton className="themeIcon"
              onClick={()=>setDarkMode(!darkMode)}
               
               aria-label="Theme change"
@@ -76,6 +84,9 @@ export const updateStoredMovies = (updatedMovie) =>
       </Box>
 
       <Switch>
+        <Route path="/about">
+          <About/>
+        </Route>
         <Route path="/movielist/edit/:id">
           <EditMovie setMovies={setMovies} movie={movie} />
         </Route>
@@ -115,7 +126,5 @@ export const updateStoredMovies = (updatedMovie) =>
     </ThemeProvider>
   );
 }
-
-
 
 export default App;

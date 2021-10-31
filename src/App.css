@@ -1,7 +1,10 @@
 .App {
   text-align: center;
   font-family:  sans-serif;
-  
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  justify-items: center; */
 }
 .MovieCard{
   display: flex;
@@ -31,4 +34,12 @@ ul{
 }
 .background{
   min-height: 100vh;
+}
+.icon{
+  position: relative;
+  top: 5px;
+}
+.themeIcon{
+  position: relative;
+  right: 0px;
 }
