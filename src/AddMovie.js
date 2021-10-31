@@ -11,6 +11,7 @@ export function AddMovie({ movie, setMovies }) {
     const [plot, setPlot] = useState();
     const [poster, setPoster] = useState();
     const [year, setYear] = useState();
+    const [rating, setRating]=useState();
    
         const addmovie=()=>{
             const newMovie={
@@ -18,6 +19,7 @@ export function AddMovie({ movie, setMovies }) {
                 plot: plot,
                 posterUrl: poster,
                 year: year,
+                rating:rating,
             };
             fetch("https://6173de78110a74001722318d.mockapi.io/movies", {
                 method:"POST",
@@ -70,6 +72,15 @@ export function AddMovie({ movie, setMovies }) {
                     onChange={(event) => setTitle(event.target.value)}
                     label="Movie name"
                     variant="outlined" />
+                <br />
+                <br />
+                <TextField
+                    fullWidth
+                    id="fullWidth"
+                    onChange={(event) => setRating(event.target.value)}
+                    label="Movie ⭐Rating"
+                    variant="outlined" />
+                    <br />
                 <br />
                 <br />
                 <TextField

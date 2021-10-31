@@ -19,6 +19,7 @@ export function AboutMovie() {
     <div>
    
       <h2>Title: {movie.title}</h2>
+      <h2>⭐Rating:{movie.rating}</h2>
       <img src={movie.posterUrl} alt="Movie poster"></img>
       <h2>Year of release: {movie.year}</h2>
       <h2>Runtime: {movie.runtime} mins</h2>

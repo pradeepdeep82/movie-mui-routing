@@ -16,12 +16,14 @@ export function EditMovie({
   let [plot, setPlot] = useState();
   let [poster, setPoster] = useState();
   let [year, setYear] = useState();
+  let [rating, setRating] = useState();
 const updateEdited=()=>{
   const editedMovie={
     title: title,
     plot: plot,
     posterUrl: poster,
     year: year,
+    rating:rating,
 };
 fetch("https://6173de78110a74001722318d.mockapi.io/movies/"+id, {
                 method:"PUT",
@@ -89,6 +91,11 @@ fetch("https://6173de78110a74001722318d.mockapi.io/movies/"+id, {
             id="outlined"
             label="Title"
             defaultValue={movies.title} />
+            <TextField
+            onChange={(event) => setRating(event.target.value)}
+            id="outlined"
+            label="⭐Rating"
+            defaultValue={movies.rating} />
           <TextField
             onChange={(event) => setYear(event.target.value)}
             id="outlined"

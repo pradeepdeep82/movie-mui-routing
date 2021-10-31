@@ -24,6 +24,7 @@ export function MovieCard({
   ind,
   year,
   id,
+  rating
   
 }) {
   const [show, setShow] = useState(false);
@@ -82,13 +83,14 @@ export function MovieCard({
               <InfoIcon />
             </IconButton>
             <IconButton
-              aria-label="Detail info of the movie"
+              aria-label="Edit the movie"
               onClick={() => {
                 history.push("/movielist/edit/" + id);
               }}
             >
               <EditIcon />
             </IconButton>
+            <h4>⭐{rating}</h4>
           </Typography>
           {show ? (
             <Typography variant="body2" color="text.secondary">
