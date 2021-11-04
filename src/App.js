@@ -5,7 +5,7 @@ import "./App.css";
 import { AddMovie } from "./AddMovie";
 import { movies } from "./movies";
 import { MovieCard } from "./MovieCard";
-import Box from "@mui/material/Box";
+import Box from '@mui/material/Box';
 import AppBar from "@mui/material/AppBar";
 import IconButton from '@mui/material/IconButton';
 import Toolbar from "@mui/material/Toolbar";
@@ -22,6 +22,8 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import AddIcon from '@mui/icons-material/Add';
 import InfoIcon from '@mui/icons-material/Info';
 import { About } from "./About";
+
+
 // import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 localStorage.setItem("movies", JSON.stringify(movies));
 export const getFromStorage = (key) => JSON.parse(localStorage.getItem(key));
@@ -29,10 +31,11 @@ export const updateStoredMovies = (updatedMovie) =>
   localStorage.setItem("movies", JSON.stringify(updatedMovie));
   
 
+
  
   function App() {
     const[darkMode, setDarkMode]=useState(false);
-    const theme=createTheme({
+    const themes=createTheme({
       palette:{
         mode:darkMode?"dark":"light"
       }
@@ -47,10 +50,15 @@ export const updateStoredMovies = (updatedMovie) =>
   };
   useEffect(getMovies,[]);
 
+  
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themes}>
       <Paper className="background" >
     <div className="App">
+
+   
+
         
       <Box className="navBar" sx={{ flexGrow: 1 }}>
         <AppBar position="static">
