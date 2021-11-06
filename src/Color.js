@@ -26,7 +26,7 @@ export function Color() {
         style={styles}
         placeholder="Enter a color" 
         onChange={(event)=>dispatch({ type:"inputColor", payload:event.target.value })}/>
-      <button >Add color</button>
+      {/* <button >Add color</button> */}
 
     </div>
   );
