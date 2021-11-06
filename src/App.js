@@ -22,7 +22,8 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import AddIcon from '@mui/icons-material/Add';
 import InfoIcon from '@mui/icons-material/Info';
 import { About } from "./About";
-
+import ColorLensIcon from '@mui/icons-material/ColorLens';
+import { Color } from "./Color";
 
 // import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 localStorage.setItem("movies", JSON.stringify(movies));
@@ -76,6 +77,9 @@ export const updateStoredMovies = (updatedMovie) =>
               <Link className="link" to="/about">
               <InfoIcon className="icon" /> About
               </Link>
+              <Link className="link" to="/color">
+              <ColorLensIcon className="icon" /> Color Game
+              </Link>
               <IconButton className="themeIcon"
              onClick={()=>setDarkMode(!darkMode)}
               
@@ -92,6 +96,9 @@ export const updateStoredMovies = (updatedMovie) =>
       </Box>
 
       <Switch>
+        <Route path="/color">
+           <Color/>
+        </Route>
         <Route path="/about">
           <About/>
         </Route>
